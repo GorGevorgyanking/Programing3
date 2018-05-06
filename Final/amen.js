@@ -1,14 +1,10 @@
-class Amen {
+class Amen extends  Kerpar {
     constructor(x, y, ind) {
-        this.index = ind;
-        this.x = x;
-        this.y = y;
+        super(x, y, ind);
         this.energy = 5;
         this.y1;
         this.x1;
         this.multiply = 0;
-
-
     }
 
     newDirections() {
@@ -25,42 +21,15 @@ class Amen {
     }
 
 
-
-
-
-
-
     chooseCell(character) {
-        this.newDirections();
-        var found = [];
-        for (var i in this.directions) {
-            var x = this.directions[i][0];
-            var y = this.directions[i][1];
-            if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
-
-                if (matrix[y][x] == character) {
-                    found.push(this.directions[i]);
-                }
-            }
-        }
-        return found;
+        this.getNewCoordinates();
+        return super.chooseCell(character);
     }
     chooseCell2(ind, ind1, ind2) {
         this.newDirections();
-        var found = [];
-        for (var i in this.directions) {
-            var x = this.directions[i][0];
-            var y = this.directions[i][1];
-            if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
-
-                if (matrix[y][x] == ind || matrix[y][x] == ind || matrix[y][x] == ind) {
-                    found.push(this.directions[i]);
-                }
-            }
-        }
-        return found;
+        return super.chooseCell(character);
     }
-
+      
 
     move() {
         var emptyCord = this.chooseCell(0);
@@ -72,15 +41,12 @@ class Amen {
             matrix[y][x] = 2;
             this.x = x;
             this.y = y;
-
-
         }
     }
 
     eat() {
         var uteliq = this.chooseCell2(1, 2, 3);
         var kerac = random(uteliq);
-
 
         if (kerac) {
             var x = kerac[0];
@@ -129,10 +95,7 @@ class Amen {
                 this.energy = 5;
             }
 
-
         }
-
-
         else {
             this.move();
             this.energy--;
@@ -141,7 +104,6 @@ class Amen {
             }
         }
 
-
     }
 
     die() {
@@ -149,16 +111,10 @@ class Amen {
         for (var i in amen) {
             if (this.x == amen[i].x && this.y == amen[i].y) {
                 amen.splice(i, 1);
+                break;
             }
         }
-
-
     }
-
-
-
-
-
 
     mul() {
         var emptyg1 = this.getDirections(0);
@@ -172,15 +128,6 @@ class Amen {
             amen.push(am);
 
             matrix[y][x] = 4;
-
-
-
-
-
         }
-
-
     }
-
-
 }

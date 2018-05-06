@@ -1,5 +1,3 @@
-
-
 var xQanak = 50;
 var yQanak = 50;
 var matrix = [];
@@ -15,7 +13,7 @@ function setup() {
     for (var y = 0; y < yQanak; y++) {
         matrix[y] = [];
         for (var x = 0; x < xQanak; x++) {
-            matrix[y][x] = Math.round(random(4));
+            matrix[y][x] = Math.round(random(5));
 
         }
     }
@@ -45,8 +43,8 @@ function setup() {
                 amen.push(am);
             }
             else if (matrix[y][x] == 5) {
-                var hov = new Hov(x, y, 4);
-                hov.push(hov);
+                var hovo = new Hov(x, y, 5);
+                hov.push(hovo);
             }
 
         }

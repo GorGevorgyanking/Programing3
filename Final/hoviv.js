@@ -1,15 +1,12 @@
-class Hov {
+class Hov extends Kerpar {
     constructor(x, y, ind) {
-        this.index = ind;
-        this.x = x;
-        this.y = y;
+        super(x, y, ind);
         this.energy = 5;
         this.y1;
         this.x1;
         this.multiply = 0;
-
-
     }
+
 
     newDirections() {
         this.directions = [
@@ -46,18 +43,7 @@ class Hov {
 
     chooseCell(character) {
         this.getNewCoordinates();
-        var found = [];
-        for (var i in this.directions) {
-            var x = this.directions[i][0];
-            var y = this.directions[i][1];
-            if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
-
-                if (matrix[y][x] == character) {
-                    found.push(this.directions[i]);
-                }
-            }
-        }
-        return found;
+        return super.chooseCell(character);
     }
 
 
@@ -71,8 +57,6 @@ class Hov {
             matrix[y][x] = 2;
             this.x = x;
             this.y = y;
-
-
         }
     }
 
@@ -113,29 +97,11 @@ class Hov {
 
         }
 
-
-
-
-
-
         else {
             this.move();
 
-
         }
 
-
     }
-
-
-
-
-
-
-
-
-
-
-
 }
 

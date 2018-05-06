@@ -1,15 +1,10 @@
-class Utox {
+class Utox extends Kerpar {
     constructor(x, y, ind) {
-        this.index = ind;
-        this.x = x;
-        this.y = y;
+        super(x, y, ind);
         this.energy = 5;
         this.y1;
         this.x1;
         this.count = 0;
-        this.multiply = 0;
-
-
     }
 
     newDirections() {
@@ -23,6 +18,10 @@ class Utox {
             [this.x, this.y + 1],
             [this.x + 1, this.y + 1]
         ];
+    }
+    chooseCell(character) {
+        this.getNewCoordinates();
+        return super.chooseCell(character);
     }
 
 
@@ -107,6 +106,7 @@ class Utox {
         for (var i in utich) {
             if (this.x == utich[i].x && this.y == utich[i].y) {
                 utich.splice(i, 1);
+                break;
             }
         }
     }
