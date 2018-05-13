@@ -1,11 +1,14 @@
-class Gisho extends Kerpar {
 
+var Kerp = require("./kerpar.js");
+
+
+module.exports = class Utox extends Kerp {
     constructor(x, y, ind) {
         super(x, y, ind);
         this.energy = 5;
         this.y1;
         this.x1;
-        this.multiply = 0;
+        this.count = 0;
     }
 
     newDirections() {
@@ -19,6 +22,10 @@ class Gisho extends Kerpar {
             [this.x, this.y + 1],
             [this.x + 1, this.y + 1]
         ];
+    }
+    chooseCell(character) {
+        this.getNewCoordinates();
+        return super.chooseCell(character);
     }
 
 
@@ -38,97 +45,75 @@ class Gisho extends Kerpar {
         return found;
     }
 
-
-
-
-   chooseCell(character) {
-        this.getNewCoordinates();
-        return super.chooseCell(character);
-    }
-
-
     move() {
-        var emptyCord = this.getDirections(1);
-
+        var emptyCord = this.getDirections(0);
         var g = random(emptyCord);
-
         if (g) {
             var x = g[0];
             var y = g[1];
             matrix[this.y][this.x] = 0;
+            matrix[y][x] = 2;
+            this.x = x;
+            this.y = y;
+
+
+        }
+
+    }
+    eat() {
+        var uteliq = this.getDirections(1);
+        var kerac = random(uteliq);
+        if (kerac) {
+            var x = kerac[0];
+            var y = kerac[1];
+            matrix[this.y][this.x] = 0;
+            matrix[y][x] = 2;
+            this.x = x;
+            this.y = y;
             for (var i in grassArr) {
                 if (x == grassArr[i].x && y == grassArr[i].y) {
                     grassArr.splice(i, 1);
                 }
             }
-            matrix[y][x] = 3;
-            this.x = x;
-            this.y = y;
-        }
-    }
-
-    eat() {
-        var uteliq = this.getDirections(2);
-        var kerac = random(uteliq);
-        if (kerac) {
-
-
-            var x = kerac[0];
-            var y = kerac[1];
-
-            matrix[this.y][this.x] = 0;
-            matrix[y][x] = 3;
-            this.x = x;
-            this.y = y;
-            for (var i in utich) {
-                if (x == utich[i].x && y == utich[i].y) {
-                    utich.splice(i, 1);
-                }
-            }
             this.energy++;
-            if (this.energy >= 15) {
+            if (this.energy >= 10) {
                 this.mul();
                 this.energy = 5;
             }
 
 
         }
-
-
         else {
             this.move();
             this.energy--;
-            if (this.energy <= 0) {
+            if (this.energy == 0) {
                 this.die();
             }
         }
-
     }
-
-    die() {
-        matrix[this.y][this.x] = 0;
-        for (var i in gisho) {
-            if (this.x == gisho[i].x && this.y == gisho[i].y) {
-                gisho.splice(i, 1);
-                break;
-            }
-        }
-
-
-    }
-
     mul() {
-        var emptyg1 = this.getDirections(0);
 
+        var emptyg1 = this.getDirections(0);
         var g1 = random(emptyg1);
         if (g1) {
             var x = g1[0];
             var y = g1[1];
+            var ut = new Utox(x, y, this.index);
+            utich.push(ut);
+            matrix[y][x] = 2;
 
-            var gs = new Gisho(x, y, this.index);
-            gisho.push(gs);
-
-            matrix[y][x] = 3;
         }
     }
+
+    die() {
+        matrix[this.y][this.x] = 0;
+        for (var i in utich) {
+            if (this.x == utich[i].x && this.y == utich[i].y) {
+                utich.splice(i, 1);
+                break;
+            }
+        }
+    }
+
 }
+

@@ -1,4 +1,6 @@
-class Grass extends Kerpar {
+var Kerp = require("./kerpar.js");
+
+module.exports = class Grass extends Kerp {
 
     mul() {
         this.multiply++;

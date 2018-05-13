@@ -1,4 +1,7 @@
-class Amen extends  Kerpar {
+var Kerp = require("./kerpar.js");
+
+
+module.exports = class Amen extends  Kerp {
     constructor(x, y, ind) {
         super(x, y, ind);
         this.energy = 5;

@@ -1,4 +1,7 @@
-class Hov extends Kerpar {
+var Kerp = require("./kerpar.js");
+
+module.exports = class Gisho extends Kerp {
+
     constructor(x, y, ind) {
         super(x, y, ind);
         this.energy = 5;
@@ -6,7 +9,6 @@ class Hov extends Kerpar {
         this.x1;
         this.multiply = 0;
     }
-
 
     newDirections() {
         this.directions = [
@@ -41,67 +43,94 @@ class Hov extends Kerpar {
 
 
 
-    chooseCell(character) {
+   chooseCell(character) {
         this.getNewCoordinates();
         return super.chooseCell(character);
     }
 
 
     move() {
-        var emptyCord = this.getDirections(0);
+        var emptyCord = this.getDirections(1);
+
         var g = random(emptyCord);
+
         if (g) {
             var x = g[0];
             var y = g[1];
             matrix[this.y][this.x] = 0;
-            matrix[y][x] = 2;
+            for (var i in grassArr) {
+                if (x == grassArr[i].x && y == grassArr[i].y) {
+                    grassArr.splice(i, 1);
+                }
+            }
+            matrix[y][x] = 3;
             this.x = x;
             this.y = y;
         }
     }
 
     eat() {
-        var uteliq = this.chooseCell(3);
-        var uteliq2 = this.chooseCell(4);
-        var axb = uteliq.concat(uteliq1.concat(uteliq2));
-        var kerac = random(axb);
-
-
+        var uteliq = this.getDirections(2);
+        var kerac = random(uteliq);
         if (kerac) {
+
+
             var x = kerac[0];
             var y = kerac[1];
-            if (matrix[y][x] == 3) {
-                matrix[this.y][this.x] = 0;
-                matrix[y][x] = 4;
-                this.x = x;
-                this.y = y;
-                for (var i in gisho) {
-                    if (x == gisho[i].x && y == gisho[i].y) {
-                        gisho.splice(i, 1);
-                    }
-                }
 
-            }
-        }
-
-        else if (matrix[y][x] == 5) {
             matrix[this.y][this.x] = 0;
-            matrix[y][x] = 4;
+            matrix[y][x] = 3;
             this.x = x;
             this.y = y;
-            for (var i in amen) {
-                if (x == amen[i].x && y == amen[i].y) {
-                    amen.splice(i, 1);
+            for (var i in utich) {
+                if (x == utich[i].x && y == utich[i].y) {
+                    utich.splice(i, 1);
                 }
             }
+            this.energy++;
+            if (this.energy >= 15) {
+                this.mul();
+                this.energy = 5;
+            }
+
 
         }
+
 
         else {
             this.move();
-
+            this.energy--;
+            if (this.energy <= 0) {
+                this.die();
+            }
         }
 
     }
-}
 
+    die() {
+        matrix[this.y][this.x] = 0;
+        for (var i in gisho) {
+            if (this.x == gisho[i].x && this.y == gisho[i].y) {
+                gisho.splice(i, 1);
+                break;
+            }
+        }
+
+
+    }
+
+    mul() {
+        var emptyg1 = this.getDirections(0);
+
+        var g1 = random(emptyg1);
+        if (g1) {
+            var x = g1[0];
+            var y = g1[1];
+
+            var gs = new Gisho(x, y, this.index);
+            gisho.push(gs);
+
+            matrix[y][x] = 3;
+        }
+    }
+}
