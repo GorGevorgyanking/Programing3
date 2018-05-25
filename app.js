@@ -69,3 +69,11 @@ var hov = [];
 var random = Math.floor(Math.random() * arr.length);
 return arr[random];
     }
+
+    for (var y = 0; y < yQanak; y++) {
+        matrix[y] = [];
+        for (var x = 0; x < xQanak; x++) {
+            matrix[y][x] = Math.round(random(5));
+
+        }
+    }
