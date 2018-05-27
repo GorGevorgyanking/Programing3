@@ -43,7 +43,7 @@ module.exports = class Gisho extends Kerp {
 
 
 
-   chooseCell(character) {
+    chooseCell(character) {
         this.getNewCoordinates();
         return super.chooseCell(character);
     }
@@ -61,6 +61,7 @@ module.exports = class Gisho extends Kerp {
             for (var i in grassArr) {
                 if (x == grassArr[i].x && y == grassArr[i].y) {
                     grassArr.splice(i, 1);
+                    kerac++;
                 }
             }
             matrix[y][x] = 3;
@@ -120,17 +121,22 @@ module.exports = class Gisho extends Kerp {
     }
 
     mul() {
-        var emptyg1 = this.getDirections(0);
+        if (exanak == 'amar') {
+            var emptyg1 = this.getDirections(0);
 
-        var g1 = random(emptyg1);
-        if (g1) {
-            var x = g1[0];
-            var y = g1[1];
+            var g1 = random(emptyg1);
+            if (g1) {
+                var x = g1[0];
+                var y = g1[1];
 
-            var gs = new Gisho(x, y, this.index);
-            gisho.push(gs);
+                var gs = new Gisho(x, y, this.index);
+                gisho.push(gs);
 
-            matrix[y][x] = 3;
+                matrix[y][x] = 3;
+            }
         }
     }
+
 }
+
+

@@ -110,6 +110,7 @@ module.exports = class Utox extends Kerp {
         for (var i in utich) {
             if (this.x == utich[i].x && this.y == utich[i].y) {
                 utich.splice(i, 1);
+                merac++;
                 break;
             }
         }

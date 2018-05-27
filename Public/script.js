@@ -1,15 +1,15 @@
 
 function setup() {
-   var socket = io.connect('http://localhost:3000');
+    socket = io.connect('http://localhost:3000');
 
 
-  
+var side = 10;
 
 
     frameRate(5);
-    createCanvas(600,600);
+    createCanvas(600, 600);
 
-    background('gray');
+    socket.on("matrix", gcel);
 
 
 }
@@ -18,15 +18,13 @@ function setup() {
 
 
 
-function draw() {
-
-   
+function gcel(matrix) {
+  
+var side = 10;
 
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
-
-              
-
+      
             if (matrix[y][x] == 1) {
                 fill("green");
                 rect(x * side, y * side, side, side);
@@ -52,18 +50,8 @@ function draw() {
                 fill('#01a3c8');
                 rect(x * side, y * side, side, side);
             }
-
-        
-    
-   
-
- 
         }
     }
-
-
-
-
 }
 
 

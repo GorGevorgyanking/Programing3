@@ -25,12 +25,12 @@ module.exports = class Amen extends  Kerp {
 
 
     chooseCell(character) {
-        this.getNewCoordinates();
+        this.newDirections();
         return super.chooseCell(character);
     }
     chooseCell2(ind, ind1, ind2) {
         this.newDirections();
-        return super.chooseCell(character);
+        return super.chooseCell(ind,ind1,ind2);
     }
       
 

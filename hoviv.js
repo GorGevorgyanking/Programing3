@@ -44,7 +44,7 @@ module.exports = class Hov extends Kerp {
 
 
     chooseCell(character) {
-        this.getNewCoordinates();
+        this.newDirections();
         return super.chooseCell(character);
     }
 
@@ -63,9 +63,9 @@ module.exports = class Hov extends Kerp {
     }
 
     eat() {
-        var uteliq = this.chooseCell(3);
+        var uteliq1 = this.chooseCell(3);
         var uteliq2 = this.chooseCell(4);
-        var axb = uteliq.concat(uteliq1.concat(uteliq2));
+        var axb = uteliq1.concat(uteliq2);
         var kerac = random(axb);
 
 
@@ -84,8 +84,8 @@ module.exports = class Hov extends Kerp {
                 }
 
             }
-        }
-
+        
+    
         else if (matrix[y][x] == 5) {
             matrix[this.y][this.x] = 0;
             matrix[y][x] = 4;
@@ -98,7 +98,7 @@ module.exports = class Hov extends Kerp {
             }
 
         }
-
+        }
         else {
             this.move();
 
